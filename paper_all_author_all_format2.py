@@ -37,13 +37,13 @@ for root, dirs, files in os.walk(base_path):
             if len(authors) == 0:
                 final_li.append((doi, ""))
             else:
+                tmp_li = []
+                tmp_li.append(doi)
                 for au in authors:
-                    tmp_li = []
-                    tmp_li.append(doi)
                     if "name" in au:
                         author = au["name"].encode('utf-8').replace("\n", " ")
                         tmp_li.append(author)
-                    final_li.append(tmp_li)
+                final_li.append(tmp_li)
 print "final_li generate over"
 
 with open(r"paper_all_author_all_format2.csv", "wb") as csvfile:
