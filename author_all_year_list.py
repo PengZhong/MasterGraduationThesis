@@ -9,10 +9,19 @@ abandon the first line in author_all_paper_li_all.csv,
 for this line is the set of all papers that lack of author information.
 """
 import csv
+import os
 from aps import process
+from conf import config
 
 
-base_path = r"/media/zhongpeng/Datas/APS-DATA/aps-dataset-metadata-2013"
+if os.name == "posix":
+    base_path = config.base_path_posix
+elif os.name == "nt":
+    base_path = config.base_path_nt
+else:
+    print "error in get base_path, unknow os"
+    exit(0)
+
 author_year_list = list()
 with open(r"author_all_paper_li_all.csv", "rb") as csvfile:
     reader = csv.reader(csvfile, dialect="excel")

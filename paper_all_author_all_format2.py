@@ -9,14 +9,15 @@ change the format of paper_all_author_all_format3.csv into format 2),
 import os
 import csv
 import json
+from conf import config
 
 
 if os.name == "posix":
-    base_path = r"/media/zhongpeng/Datas/APS-DATA/aps-dataset-metadata-2013"
+    base_path = config.base_path_posix
 elif os.name == "nt":
-    base_path = r"E:/APS-DATA/aps-dataset-metadata-2013"
+    base_path = config.base_path_nt
 else:
-    print "error in init base_path"
+    print "error in get base_path, unknow os"
     exit(0)
 
 print base_path
