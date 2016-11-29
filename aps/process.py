@@ -4,6 +4,9 @@ some useful functions of processing APS-DATA.
 """
 import json
 import os
+import sys
+sys.path.append("..")
+from conf import config
 
 
 def get_file_path_by_doi(base_path, doi):
@@ -34,8 +37,30 @@ def get_paper_year(file_path):
         return None
 
 
+# about authors
+def get_author_list_by_doi(base_path, doi):
+    """
+    input: base_path: metadata's absolute path, doi: the paper's doi
+    output: the list of the paper's all author
+    """
+    file_path = get_file_path_by_doi(base_path, doi)
+    f = open(file_path, "rb")
+    data = json.load(f)
+    f.close()
+    author_li = list()
+    try:
+        authors = data["authors"]
+        for au in authors:
+            author_li.append(au["name"].encode("utf-8"))
+    except:
+        print "KeyError, please check the doi", doi
+    return author_li
+
+
 if __name__ == '__main__':
     doi = "10.1103/PhysRevA.23.52"
-    base_path = r"/media/zhongpeng/Datas/APS-DATA/aps-dataset-metadata-2013"
+    base_path = config.base_path_posix
     file_path = get_file_path_by_doi(base_path, doi)
     print get_paper_year(file_path)
+    print "***********************"
+    print get_author_list_by_doi(base_path, "10.1103/PhysRevC.3.79")
