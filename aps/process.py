@@ -26,7 +26,7 @@ def get_file_path_by_doi(base_path, doi):
 def get_paper_year(file_path):
     """
     input: the absolute json file path
-    output: the paper's publish year if exist, or return None
+    output: the paper's publish year(string type) if exist, or return None
     """
     f = open(file_path)
     data = json.load(f)
@@ -35,6 +35,19 @@ def get_paper_year(file_path):
         return data["date"][0: 4].encode('utf-8')
     else:
         return None
+
+
+def get_paper_year_by_doi(doi):
+    """don't ask me why I program this function again! the above one is a shit!"""
+    if os.name == "posix":
+        base_path = config.base_path_posix
+    elif os.name == "nt":
+        base_path = config.base_path_nt
+    else:
+        print "base_path init error, exit"
+        exit(0)
+    file_path = get_file_path_by_doi(base_path, doi)
+    return get_paper_year(file_path)    # it's a shit, but I still use it.
 
 
 # about authors
@@ -59,8 +72,15 @@ def get_author_list_by_doi(base_path, doi):
 
 if __name__ == '__main__':
     doi = "10.1103/PhysRevA.23.52"
-    base_path = config.base_path_posix
+    if os.name == "posix":
+        base_path = config.base_path_posix
+    elif os.name == "nt":
+        base_path = config.base_path_nt
+    else:
+        print "base_path init error, exit"
+        exit(0)
     file_path = get_file_path_by_doi(base_path, doi)
     print get_paper_year(file_path)
+    print get_paper_year_by_doi(doi)
     print "***********************"
     print get_author_list_by_doi(base_path, "10.1103/PhysRevC.3.79")
