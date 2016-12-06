@@ -19,7 +19,11 @@ def get_file_path_by_doi(base_path, doi):
         "PhysRevSTAB":"PRSTAB", "PhysRevSTPER":"PRSTPER", "PhysRevX":"PRX", "RevModPhys":"RMP"}
     li = doi.split(".")
     file_name = doi.split("/")[1] + ".json"
-    file_path = os.path.join(base_path, path_dic[li[1][5: ]], li[2], file_name)
+    try:
+        file_path = os.path.join(base_path, path_dic[li[1][5: ]], li[2], file_name)
+    except KeyError as e:
+        print "KeyError at base_path: %s, doi: %s" % (base_path, doi)
+        file_path = ""
     return file_path
 
 
@@ -28,13 +32,16 @@ def get_paper_year(file_path):
     input: the absolute json file path
     output: the paper's publish year(string type) if exist, or return None
     """
+    if file_path == "":
+        print "file_path is None"
+        return sys.maxint
     f = open(file_path)
     data = json.load(f)
     f.close()
     if "date" in data:
         return data["date"][0: 4].encode('utf-8')
     else:
-        return None
+        return sys.maxint
 
 
 def get_paper_year_by_doi(doi):
