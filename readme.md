@@ -52,4 +52,12 @@ author_gt10_paper_li.py
 根据author_gt10.csv和author_all_paper_li_all.csv生成学术生涯大于10年，
 且起始生涯在1993年之后（包含1993年）的学者的学者姓名和论文doi列表对应的csv文件
 
+7.
+doi_year.csv
+存储doi与year对应的信息, 其中的doi只包含出现在原始citation文件中
+且信息完整(包含作者信息和发表年份信息)的论文
+aps_full_info_citation.csv
+aps_full_info_citation.py
+根据aps原始数据集中的原始引用数据, 筛选掉引用和被引用论文doi中信息不全的数据行
+(作者信息和发表年份信息)
 
