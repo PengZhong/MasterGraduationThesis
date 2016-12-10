@@ -3,7 +3,8 @@
 character_4: author's coauthor count in first 5 year
 author: Zhong Peng
 createDate: 2012-12-07
-lastModified: 
+lastModified: 2012-12-10
+calculate author's coauthor number in first 5 years.
 """
 import csv
 import os
@@ -27,11 +28,11 @@ with open(r"author_paper_5year.csv", "rb") as csvfile:
     reader = csv.reader(csvfile, dialect="excel")
     for row in reader:
         print row[0]
-        coauthor_num = 0
+        coauthor_set = set()
         paper_li = row[1][2: -2].split('\', \'')
         for paper in paper_li:
-            coauthor_num += len(process.get_author_list_by_doi(base_path, paper)) - 1
-        author_coauthor_count_dict[row[0]] = coauthor_num
+            coauthor_set.update(process.get_author_list_by_doi(base_path, paper))
+        author_coauthor_count_dict[row[0]] = len(coauthor_set) - 1
 print "author_coauthor_count_dict generates over"
 
 with open(r"author_coauthor_count.csv", "wb") as csvfile:
