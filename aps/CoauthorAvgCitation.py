@@ -130,9 +130,9 @@ def get_coauthor_avg_citation(author, author_paper_file_path, paper_citation_fil
     coauthor_list = get_coauthor_list(author)
     coauthor_paper_list = get_all_coauthor_paper_list(coauthor_list, author_paper_file_path, year)
     total_cited_count = get_cited_count(coauthor_paper_list, paper_citation_file_path, year)
-    print coauthor_list
-    print coauthor_paper_list
-    print total_cited_count
+    # print "coauthor_list", coauthor_list
+    # print "coauthor_paper_list", coauthor_paper_list
+    # print "total_cited_count", total_cited_count
     if len(coauthor_list) == 0:
         return total_cited_count
     return total_cited_count / len(coauthor_list)
@@ -152,8 +152,8 @@ if __name__ == '__main__':
     paper_citation_file_path = citation_file_path
     with open(r"../author_gt10.csv", "rb") as csvfile:
         reader = csv.reader(csvfile, dialect="excel")
-        reader.next()
+        # reader.next()
         for row in reader:
-            print row[0]
-            print get_coauthor_avg_citation(row[0], author_paper_file_path, paper_citation_file_path, int(row[1]))
+            print row[0], row[1]
+            print get_coauthor_avg_citation(row[0], author_paper_file_path, paper_citation_file_path, int(row[1]) + 4)
             break
