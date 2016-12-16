@@ -3,7 +3,7 @@
 character_5: author's coauthor average citation number
 author: Zhong Peng(pengmany@outlook.com)
 createDate: 2016-12-08
-lastModified: 
+lastModified: 2016-12-16
 calculate author's coauthors' average citation number of first 5 years.
 """
 import csv
