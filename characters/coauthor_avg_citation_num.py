@@ -24,6 +24,7 @@ with open(r"../author_gt10.csv", "rb") as csvfile:
     reader = csv.reader(csvfile, dialect="excel")
     for row in reader:
         author = row[0]
+        print author
         avg_citation = CoauthorAvgCitation.get_coauthor_avg_citation(author, author_paper_file_path, paper_citation_file_path, int(row[1]))
         author_coauthor_avg_citation_dict[author] = avg_citation
 print "author_coauthor_avg_citation_dict generates over"
