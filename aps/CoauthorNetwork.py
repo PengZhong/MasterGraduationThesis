@@ -2,26 +2,28 @@
 """
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-14
-lastModified: 
+lastModified: 2016-12-17
 
 """
+from __future__ import division
 import csv
 import networkx as nx
 import sys
 sys.path.append("..")
 from conf import config
 import process
+from collections import defaultdict
 
 
 # get metadata's absolute base path
 base_path = config.get_base_path()
 
-
-def get_all_related_paper_by_author(author, year, author_paper_file_path):
+def get_all_related_paper_by_year(year, author_paper_file_path):
+# def get_all_related_paper_by_author(author, year, author_paper_file_path):
     """
     get all related paper's doi list by author
-    @type author: string value
-    @param author: author's name
+    # @type author: string value
+    # @param author: author's name
     @type year: int value
     @param year: the 5th year from author's academic start
     @type author_paper_file_path: string value
@@ -67,12 +69,12 @@ def get_all_related_paper_by_author(author, year, author_paper_file_path):
 #         pass
 #     return edge_weight
 
-
-def create_coauthor_network(author, year, author_paper_file_path, paper_rank_dict):
+def create_coauthor_network(year, author_paper_file_path, paper_rank_dict):
+# def create_coauthor_network(author, year, author_paper_file_path, paper_rank_dict):
     """
     create coauthor network of the author in the year.
-    @type author: string value
-    @param author: author name
+    # @type author: string value
+    # @param author: author name
     @type year: int value
     @param year: we use the data of the year to create coauthor network
     @type author_paper_file_path:string value
@@ -84,7 +86,8 @@ def create_coauthor_network(author, year, author_paper_file_path, paper_rank_dic
     """
     sum_dict = {1: 1, 2: 3, 3: 6, 4: 10, 5: 15, 6: 21, 7: 28, 8: 36, 9: 45, 10: 55}
     graph = nx.DiGraph()
-    related_paper_list = get_all_related_paper_by_author(author, year, author_paper_file_path)
+    # related_paper_list = get_all_related_paper_by_author(author, year, author_paper_file_path)
+    related_paper_list = get_all_related_paper_by_year(year, author_paper_file_path)
     for related_paper in related_paper_list:
         author_list = process.get_author_list_by_doi(base_path, related_paper)
         length = len(author_list)
@@ -93,25 +96,30 @@ def create_coauthor_network(author, year, author_paper_file_path, paper_rank_dic
             author_list = author_list[0: 10]
         paper_value = paper_rank_dict[related_paper]
         for i in range(0, length):
-            for j in range(i + 1, length + 1):
+            for j in range(i + 1, length):
                 authorA = author_list[i]
                 authorB = author_list[j]
                 # add edge from A to B
                 weight_dict_AB = graph.get_edge_data(authorA, authorB)
                 if weight_dict_AB == {}:
-                    graph.add_edge(authorA, authorB, attr_dict={"weight": paper_value * (i + 1) / sum_dict[length]})
+                    graph.add_edge(authorA, authorB, attr_dict={"weight": paper_value * (length - i) / sum_dict[length]})
                 else:
-                    weight_dict_AB["weight"] += paper_value * (i + 1) / sum_dict[length]
+                    weight_dict_AB["weight"] += paper_value * (length - i) / sum_dict[length]
                     graph.add_edge(authorA, authorB, attr_dict=weight_dict_AB)
                 # add edge from B to A
                 weight_dict_BA = graph.get_edge_data(authorB, authorA)
                 if weight_dict_BA == {}:
-                    graph.add_edge(authorB, authorA, attr_dict={"weight": paper_value * (j + 1) / sum_dict[length]})
+                    graph.add_edge(authorB, authorA, attr_dict={"weight": paper_value * (length - j) / sum_dict[length]})
                 else:
-                    weight_dict_BA["weight"] += paper_value * (j + 1) / sum_dict[length]
+                    weight_dict_BA["weight"] += paper_value * (length - j) / sum_dict[length]
                     graph.add_edge(authorB, authorA, attr_dict=weight_dict_BA)
     return graph
 
 
 if __name__ == '__main__':
     print base_path
+    paper_rank_dict = defaultdict(lambda : 1)
+    author_paper_file_path = r"../author_all_paper_li_all.csv"
+    graph = create_coauthor_network(1993, author_paper_file_path, paper_rank_dict)
+    print graph.num_of_nodes()
+    print graph.num_of_edges()
