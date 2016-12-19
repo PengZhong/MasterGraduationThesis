@@ -36,6 +36,7 @@ def get_all_related_paper_by_year(year, author_paper_file_path):
     with open(author_paper_file_path, "rb") as csvfile:
         reader = csv.reader(csvfile, dialect="excel")
         for row in reader:
+            print reader.line_num
             paper_li = row[1][2: -2].split('\', \'')
             for paper in paper_li:
                 if int(process.get_paper_year_by_doi(paper)) <= year:
@@ -66,6 +67,9 @@ def get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path):
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     graph.add_edge(row[0], row[1])
     rank_score_dict = basic_pagerank_directed(graph)
+    with open(r"test_paper_rank.csv", "wb") as csvfile:
+        writer = csv.writer(csvfile, dialect="excel")
+        writer.writerows(rank_score_dict.iteritems())
     return rank_score_dict
 
 
@@ -92,6 +96,7 @@ def create_coauthor_network(year, author_paper_file_path, citation_file_path):
     related_paper_list = get_all_related_paper_by_year(year, author_paper_file_path)
     paper_rank_dict = get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path)
     for related_paper in related_paper_list:
+        print related_paper
         author_list = process.get_author_list_by_doi(base_path, related_paper)
         length = len(author_list)
         if length == 0:
