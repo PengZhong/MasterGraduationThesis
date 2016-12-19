@@ -35,6 +35,7 @@ def get_all_related_paper_by_year(year, author_paper_file_path):
     with open(author_paper_file_path, "rb") as csvfile:
         reader = csv.reader(csvfile, dialect="excel")
         for row in reader:
+            print reader.line_num
             paper_li = row[1][2: -2].split('\', \'')
             for paper in paper_li:
                 if int(process.get_paper_year_by_doi(paper)) <= year:
