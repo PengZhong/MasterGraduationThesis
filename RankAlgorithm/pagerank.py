@@ -30,7 +30,7 @@ def basic_pagerank_directed(graph, damping_factor=0.85, max_iterations=20, min_d
         print "empty netowrk, return {}"
         return {}
     
-    rank_value_dict = {}.fromkeys(nodes, 1 / graph_size)
+    rank_value_dict = {}.fromkeys(nodes, 1.0 / graph_size)
     min_value = (1.0 - damping_factor) / graph_size
 
     for time in xrange(1, max_iterations + 1):
@@ -121,8 +121,9 @@ def weighted_pagerank_directed_coauthor_network(graph, damping_factor=0.85, max_
         for node in nodes:
             rank_score = min_value
             for in_node in graph.predecessors(node):
+                sum_weight = 0.0
                 for out_node in graph.successors(in_node):
-                    sum_weight = graph.get_edge_data(in_node, out_node)["weight"]
+                    sum_weight += graph.get_edge_data(in_node, out_node)["weight"]
                 rank_score += damping_factor * rank_value_dict[in_node] * graph.get_edge_data(in_node, node)["weight"] / sum_weight
             diff += abs(rank_score - rank_value_dict[node])
             rank_value_dict[node] = rank_score
