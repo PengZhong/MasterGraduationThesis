@@ -94,6 +94,8 @@ def create_coauthor_network(year, author_paper_file_path, citation_file_path):
     for related_paper in related_paper_list:
         author_list = process.get_author_list_by_doi(base_path, related_paper)
         length = len(author_list)
+        if length == 0:
+            continue
         if length > 10:
             length == 10
             author_list = author_list[0: 10]
@@ -104,14 +106,14 @@ def create_coauthor_network(year, author_paper_file_path, citation_file_path):
                 authorB = author_list[j]
                 # add edge from A to B
                 weight_dict_AB = graph.get_edge_data(authorA, authorB)
-                if weight_dict_AB == {}:
+                if weight_dict_AB == {} or weight_dict_AB == None:
                     graph.add_edge(authorA, authorB, attr_dict={"weight": paper_value * (length - i) / sum_dict[length]})
                 else:
                     weight_dict_AB["weight"] += paper_value * (length - i) / sum_dict[length]
                     graph.add_edge(authorA, authorB, attr_dict=weight_dict_AB)
                 # add edge from B to A
                 weight_dict_BA = graph.get_edge_data(authorB, authorA)
-                if weight_dict_BA == {}:
+                if weight_dict_BA == {} or weight_dict_BA == None:
                     graph.add_edge(authorB, authorA, attr_dict={"weight": paper_value * (length - j) / sum_dict[length]})
                 else:
                     weight_dict_BA["weight"] += paper_value * (length - j) / sum_dict[length]
@@ -123,6 +125,6 @@ if __name__ == '__main__':
     print base_path
     paper_rank_dict = defaultdict(lambda : 1)
     author_paper_file_path = r"../author_all_paper_li_all.csv"
-    graph = create_coauthor_network(1993, author_paper_file_path, paper_rank_dict)
+    graph = create_coauthor_network(1997, author_paper_file_path, paper_rank_dict)
     print graph.num_of_nodes()
     print graph.num_of_edges()
