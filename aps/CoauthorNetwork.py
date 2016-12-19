@@ -125,6 +125,7 @@ if __name__ == '__main__':
     print base_path
     paper_rank_dict = defaultdict(lambda : 1)
     author_paper_file_path = r"../author_all_paper_li_all.csv"
-    graph = create_coauthor_network(1997, author_paper_file_path, paper_rank_dict)
+    citation_file_path = r"../aps_full_info_citation.csv"
+    graph = create_coauthor_network(1997, author_paper_file_path, citation_file_path)
     print graph.num_of_nodes()
     print graph.num_of_edges()
