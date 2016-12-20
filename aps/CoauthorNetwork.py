@@ -2,7 +2,7 @@
 """
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-14
-lastModified: 2016-12-19
+lastModified: 2016-12-20
 
 """
 from __future__ import division
@@ -66,7 +66,11 @@ def get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path):
             if int(process.get_paper_year_by_doi(row[0])) <= year:
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     graph.add_edge(row[0], row[1])
-    rank_score_dict = basic_pagerank_directed(graph)
+    rank_score_dict = pagerank.basic_pagerank_directed(graph)
+    with open(r"test_paper_rank_%s.csv" % year, "wb") as csvfile:
+        writer = csv.writer(csvfile, dialect="excel")
+        writer.writerows(rank_score_dict.iteritems())
+    rank_score_dict = pagerank.basic_pagerank_directed(graph)
     return rank_score_dict
 
 
@@ -93,6 +97,7 @@ def create_coauthor_network(year, author_paper_file_path, citation_file_path):
     related_paper_list = get_all_related_paper_by_year(year, author_paper_file_path)
     paper_rank_dict = get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path)
     for related_paper in related_paper_list:
+        print related_paper
         author_list = process.get_author_list_by_doi(base_path, related_paper)
         length = len(author_list)
         if length == 0:
