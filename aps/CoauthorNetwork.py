@@ -103,7 +103,7 @@ def create_coauthor_network(year, author_paper_file_path, citation_file_path):
         if length == 0:
             continue
         if length > 10:
-            length == 10
+            length = 10
             author_list = author_list[0: 10]
         paper_value = paper_rank_dict[related_paper]
         for i in range(0, length):
