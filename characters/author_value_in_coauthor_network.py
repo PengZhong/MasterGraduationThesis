@@ -3,7 +3,7 @@
 character_6: author's rank value in coauthor network
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-17
-lastModified:
+lastModified: 2016-12-20
 calculate every author's score value in coauthor network of his(her) 5th academic year.
 we calculate this value by the year and then extract authors whose 5th year ofacademic
 career is the year. And then save the value in author_value_in_coauthor_network.csv
@@ -19,7 +19,7 @@ from RankAlgorithm import pagerank
 
 
 year_author_dict = dict()
-with open(r"../author_gt10.csv", "rb") as cvsfile:
+with open(r"../author_gt10.csv", "rb") as csvfile:
     reader = csv.reader(csvfile, dialect="excel")
     for row in reader:
         year = int(row[1]) + 4
