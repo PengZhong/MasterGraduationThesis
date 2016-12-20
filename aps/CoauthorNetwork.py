@@ -2,7 +2,7 @@
 """
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-14
-lastModified: 2016-12-19
+lastModified: 2016-12-20
 
 """
 from __future__ import division
@@ -67,9 +67,10 @@ def get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path):
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     graph.add_edge(row[0], row[1])
     rank_score_dict = basic_pagerank_directed(graph)
-    with open(r"test_paper_rank.csv", "wb") as csvfile:
+    with open(r"test_paper_rank_%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerows(rank_score_dict.iteritems())
+    rank_score_dict = pagerank.basic_pagerank_directed(graph)
     return rank_score_dict
 
 
