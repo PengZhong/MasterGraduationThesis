@@ -133,5 +133,5 @@ if __name__ == '__main__':
     author_paper_file_path = r"../author_all_paper_li_all.csv"
     citation_file_path = r"../aps_full_info_citation.csv"
     graph = create_coauthor_network(1997, author_paper_file_path, citation_file_path)
-    print graph.num_of_nodes()
-    print graph.num_of_edges()
+    print graph.number_of_nodes()
+    print graph.number_of_edges()
