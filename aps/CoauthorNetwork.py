@@ -65,7 +65,7 @@ def get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path):
             if int(process.get_paper_year_by_doi(row[0])) <= year:
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     graph.add_edge(row[0], row[1])
-    rank_score_dict = basic_pagerank_directed(graph)
+    rank_score_dict = pagerank.basic_pagerank_directed(graph)
     return rank_score_dict
 
 
