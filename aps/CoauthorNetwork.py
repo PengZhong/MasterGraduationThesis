@@ -67,7 +67,7 @@ def get_paper_rank_dict_by_year(year, related_paper_list, citation_file_path):
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     graph.add_edge(row[0], row[1])
     rank_score_dict = pagerank.basic_pagerank_directed(graph)
-    with open(r"test_paper_rank_%s.csv" % year, "wb") as csvfile:
+    with open(r"../result/CoauthorNetwork/paper_rank_%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerows(rank_score_dict.iteritems())
     rank_score_dict = pagerank.basic_pagerank_directed(graph)
@@ -133,5 +133,5 @@ if __name__ == '__main__':
     author_paper_file_path = r"../author_all_paper_li_all.csv"
     citation_file_path = r"../aps_full_info_citation.csv"
     graph = create_coauthor_network(1997, author_paper_file_path, citation_file_path)
-    print graph.num_of_nodes()
-    print graph.num_of_edges()
+    print graph.number_of_nodes()
+    print graph.number_of_edges()
