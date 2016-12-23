@@ -78,7 +78,7 @@ def get_author_list_by_doi(base_path, doi):
 
 
 if __name__ == '__main__':
-    doi = "10.1103/PhysRevA.23.52"
+    doi = "10.1103/PhysRevLett.73.220"
     if os.name == "posix":
         base_path = config.base_path_posix
     elif os.name == "nt":
@@ -90,4 +90,6 @@ if __name__ == '__main__':
     print get_paper_year(file_path)
     print get_paper_year_by_doi(doi)
     print "***********************"
-    print get_author_list_by_doi(base_path, "10.1103/PhysRevC.3.79")
+    author_li = get_author_list_by_doi(base_path, doi)
+    print author_li
+    print author_li.index("D. Hennessy")
