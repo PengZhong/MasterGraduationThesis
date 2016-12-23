@@ -28,8 +28,13 @@ with open(r"../author_gt10.csv", "rb") as csvfile:
         else:
             year_author_dict[year] = [row[0], ]
 print "year_author_dict generates over"
+# for k, v in year_author_dict.iteritems():
+#     if "D. Hennessy" in v:
+#         print "find D. Hennessy in year", k
+#         exit(0)
 
 author_paper_file_path = r"../author_all_paper_li_all.csv"
+# author_paper_file_path = r"../author_gt10_paper_li.csv"
 citation_file_path = r"../aps_full_info_citation.csv"
 for year in range(1997, 2008):
     author_value_dict = dict()
@@ -38,8 +43,16 @@ for year in range(1997, 2008):
     # call weighted pagerank algorithm, return rank_value_dict
     rank_value_dict = pagerank.weighted_pagerank_directed_coauthor_network(graph)
 
+    KeyError_list = list()
     for author in year_author_dict[year]:
-        author_value_dict[author] = rank_value_dict[author]
+        try:
+            author_value_dict[author] = rank_value_dict[author]
+        except KeyError:
+            KeyError_list.append([author, ])
+    with open(r"KeyError_%s.csv" % year, "wb") as csvfile:
+        writer = csv.writer(csvfile, dialect="excel")
+        writer.writerows(KeyError_list)
+    print "KeyError file writes over of the year:", year
 
     # save result
     with open(r"%s.csv" % year, "wb") as csvfile:
