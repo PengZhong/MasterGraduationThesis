@@ -3,7 +3,7 @@
 character_7: author's value in author citing-cited network(according paper citation relation)
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-25
-lastModified: 
+lastModified: 2016-12-18
 
 """
 import csv
