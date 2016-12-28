@@ -25,7 +25,7 @@ with open(r"../author_gt10_new.csv", "rb") as csvfile:
 print "year_author_dict generates over"
 
 
-paper_citation_relation_file_path = r"aps_full_info_citation.csv"
+paper_citation_relation_file_path = r"../aps_full_info_citation.csv"
 # 1994 + 4 ~ 2003 + 4(including this year)
 for year in range(1997, 2008):
     author_value_dict = dict()

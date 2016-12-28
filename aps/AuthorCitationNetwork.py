@@ -57,13 +57,13 @@ def get_paper_citation_relation(year, paper_citation_relation_file_path):
     return paper_citation_relation_list
 
 
-def get_author_citation_network(year, author_file_path, paper_citation_relation_file_path):
+def get_author_citation_network(year, paper_citation_relation_file_path):
     """
     get author citation network
     @type year: int value
     @param year: the 5th year from author's academic starts
-    @type author_file_path: string value
-    @param author_file_path: the authors we filtered(author_gt10_new.csv)
+    # @type author_file_path: string value
+    # @param author_file_path: the authors we filtered(author_gt10_new.csv)
     @type paper_citation_relation_file_path: string value
     @param paper_citation_relation_file_path: paper's citing-cited relation file(aps_full_info_citation.csv)
     return type: networkx object
