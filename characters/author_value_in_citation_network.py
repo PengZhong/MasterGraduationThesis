@@ -28,12 +28,14 @@ print "year_author_dict generates over"
 paper_citation_relation_file_path = r"../aps_full_info_citation.csv"
 # 1994 + 4 ~ 2003 + 4(including this year)
 for year in range(1997, 2008):
+    print year
     author_value_dict = dict()
     # call graph creation function
-    AuthorCitationNetwork.get_author_citation_network(year, paper_citation_relation_file_path)
+    graph = AuthorCitationNetwork.get_author_citation_network(year, paper_citation_relation_file_path)
     # rank graph node
     rank_value = pagerank.weighted_pagerank_directed_author_citation_network(graph)
     for author in year_author_dict[year]:
+        print author
         author_value_dict[author] = rank_value[author]
     with open(r"../result/AuthorCitationNetwork/%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")

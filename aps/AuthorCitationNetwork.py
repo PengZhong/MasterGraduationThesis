@@ -50,6 +50,8 @@ def get_paper_citation_relation(year, paper_citation_relation_file_path):
     with open(paper_citation_relation_file_path, "rb") as csvfile:
         reader = csv.reader(csvfile, dialect="excel")
         for row in reader:
+            if reader.line_num % 10000 == 0:
+                print reader.line_num
             if int(process.get_paper_year_by_doi(row[0])) <= year:
                 if int(process.get_paper_year_by_doi(row[1])) <= year:
                     paper_citation_relation_list.append(row)
@@ -71,6 +73,7 @@ def get_author_citation_network(year, paper_citation_relation_file_path):
     """
     paper_citation_relation_list = get_paper_citation_relation(year, paper_citation_relation_file_path)
     graph = nx.DiGraph()
+    print "in creating graph"
     for citation_relation in paper_citation_relation_list:
         citing_author_list = process.get_author_list_by_doi(base_path, citation_relation[0])
         cited_author_list = process.get_author_list_by_doi(base_path, citation_relation[1])
