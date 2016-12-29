@@ -85,6 +85,7 @@ def get_author_citation_network(year, paper_citation_relation_file_path):
                     graph.add_edge(citing_author, cited_author, attr_dict=attr_dic)
                 else:
                     graph.add_edge(citing_author, cited_author, attr_dict={"weight": 1})
+    return graph
 
 
 if __name__ == '__main__':
