@@ -2,7 +2,7 @@
 """
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-25
-lastModified: 2016-12-28
+lastModified: 2016-12-31
 
 """
 import networkx as nx
