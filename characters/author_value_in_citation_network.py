@@ -3,7 +3,7 @@
 character_7: author's value in author citing-cited network(according paper citation relation)
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-25
-lastModified: 2016-12-18
+lastModified: 2017-01-01
 
 """
 import csv
@@ -30,13 +30,23 @@ paper_citation_relation_file_path = r"../aps_full_info_citation.csv"
 for year in range(1997, 2008):
     print year
     author_value_dict = dict()
+    KeyError_list = list()
     # call graph creation function
     graph = AuthorCitationNetwork.get_author_citation_network(year, paper_citation_relation_file_path)
     # rank graph node
     rank_value = pagerank.weighted_pagerank_directed_author_citation_network(graph)
     for author in year_author_dict[year]:
         print author
-        author_value_dict[author] = rank_value[author]
+        try:
+            author_value_dict[author] = rank_value[author]
+        except KeyError as e:
+            KeyError_list.append([author, ])
+    with open(r"../result/AuthorCitationNetwork/KeyError_%s.csv" % year, "wb") as csvfile:
+        writer = csv.writer(csvfile, dialect="excel")
+        writer.writerows(KeyError_list)
+    print "KeyError fiels writes over"
+
+    # save result
     with open(r"../result/AuthorCitationNetwork/%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerows(author_value_dict.iteritems())

@@ -2,7 +2,7 @@
 """
 author: Zhong Peng (pengmany@outlook.com)
 createDate: 2016-12-25
-lastModified: 2016-12-28
+lastModified: 2016-12-31
 
 """
 import networkx as nx
@@ -76,8 +76,14 @@ def get_author_citation_network(year, paper_citation_relation_file_path):
     print "in creating graph"
     for citation_relation in paper_citation_relation_list:
         citing_author_list = process.get_author_list_by_doi(base_path, citation_relation[0])
+        if len(citing_author_list) > 10:
+            citing_author_list = citing_author_list[0: 10]
         cited_author_list = process.get_author_list_by_doi(base_path, citation_relation[1])
+        if len(cited_author_list) > 10:
+            cited_author_list = cited_author_list[0: 10]
         for citing_author in citing_author_list:
+            if citing_author in cited_author_list:
+                cited_author_list.remove(citing_author)
             for cited_author in cited_author_list:
                 if graph.has_edge(citing_author, cited_author):
                     attr_dic = graph.get_edge_data(citing_author, cited_author)
