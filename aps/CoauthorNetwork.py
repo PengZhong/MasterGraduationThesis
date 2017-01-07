@@ -19,6 +19,7 @@ from RankAlgorithm import pagerank
 # get metadata's absolute base path
 base_path = config.get_base_path()
 
+
 def get_all_related_paper_by_year(year, author_paper_file_path):
 # def get_all_related_paper_by_author(author, year, author_paper_file_path):
     """

@@ -49,13 +49,13 @@ for year in range(1997, 2008):
             author_value_dict[author] = rank_value_dict[author]
         except KeyError:
             KeyError_list.append([author, ])
-    with open(r"KeyError_%s.csv" % year, "wb") as csvfile:
+    with open(r"../result/CoauthorNetwork/KeyError_%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerows(KeyError_list)
     print "KeyError file writes over of the year:", year
 
     # save result
-    with open(r"%s.csv" % year, "wb") as csvfile:
+    with open(r"../result/CoauthorNetwork/%s.csv" % year, "wb") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerows(author_value_dict.iteritems())
     print "result %s.csv writes over" % year
