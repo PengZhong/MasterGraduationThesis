@@ -2,8 +2,8 @@
 """
 character_4: author's coauthor count in first 5 year
 author: Zhong Peng
-createDate: 2012-12-07
-lastModified: 2012-12-10
+createDate: 2016-12-07
+lastModified: 2016-12-10
 calculate author's coauthor number in first 5 years.
 """
 import csv

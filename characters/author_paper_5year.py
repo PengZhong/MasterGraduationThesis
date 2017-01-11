@@ -2,8 +2,8 @@
 """
 character_2.1: author's citation number
 author: Zhong Peng
-createDate: 2012-11-30
-lastModified: 2012-12-05
+createDate: 2016-11-30
+lastModified: 2016-12-05
 this program's target is generating author and papers those published in first 5 years 2 columns csv file
 """
 import csv
