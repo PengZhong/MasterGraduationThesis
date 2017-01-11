@@ -2,8 +2,8 @@
 """
 character_2.2: author's citation number
 author: Zhong Peng
-createDate: 2012-11-30
-lastModified: 2012-12-07
+createDate: 2016-11-30
+lastModified: 2016-12-07
 save author's total citation count of the first 5 years into csv file
 """
 import csv

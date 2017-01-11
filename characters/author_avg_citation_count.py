@@ -2,7 +2,7 @@
 """
 character_3: author's average citation count in the first 5year
 author: Zhong Peng
-createDate: 2012-12-07
+createDate: 2016-12-07
 lastModified: 
 according to author_citation_count.csv and author_paper_5year.csv, calculating
 the average number of citations of the author's first 5 years publications.

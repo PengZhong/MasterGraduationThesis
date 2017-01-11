@@ -2,7 +2,7 @@
 """
 character_1: author's paper number
 author: Zhong Peng
-createDate: 201-11-30
+createDate: 2016-11-30
 lastModified: 
 collect authors'(in author_gt10.csv) total paper number, 
 after 5 years of their academic career's start.
