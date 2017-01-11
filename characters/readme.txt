@@ -44,8 +44,8 @@ coauthor_avg_citation_num.py
 
 6.
 author_value_in_coauthor_network.py
-1997 ~ 2007.csv
-KeyError_1997 ~ KeyError_2007.csv
+1997 ~ 2007.csv (save in ../result/CoauthorNetwork/)
+KeyError_1997 ~ KeyError_2007.csv (save in ../result/CoauthorNetwork/)
 调用../aps/CoauthorNetwork.py，根据每个年份求解包含1997~2007(学术生涯第五年)
 之间的作者，过程中产生的paper的pagerank值存储在../result/CoauthorNetwork目录下
 以paper_rank_1997.csv的形式命名
@@ -53,3 +53,11 @@ KeyError_1997 ~ KeyError_2007.csv
 KeyError_1997.csv ~ KeyError_2007.csv是“错误值”，比如前五年的全部论文中，该名作者的排名在第10名之后
 Notice：本程序中对论文包含很多作者的情况，只计算排名前10的作者为有效作者
 
+7.
+author_value_in_citation_network.py
+1997 ~ 2007.csv (save in ../result/AuthorCitationNetwork/)
+KeyError_1997 ~ KeyError_2007.csv (save in ../result/AuthorCitationNetwork/)
+通过论文的引用关系构建作者的引用关系网络, 进行网络节点重要性分析
+1997 ～ 2007.csv是产生的结果，也就是该项特征值
+KeyError_1997.csv ~ KeyError_2007.csv是“错误值”，比如前五年的全部论文中，该名作者的排名在第10名之后
+Notice：本程序中对论文包含很多作者的情况，只计算排名前10的作者为有效作者

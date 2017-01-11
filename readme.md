@@ -61,3 +61,8 @@ aps_full_info_citation.py
 根据aps原始数据集中的原始引用数据, 筛选掉引用和被引用论文doi中信息不全的数据行
 (作者信息和发表年份信息)
 
+8.
+author_gt10_new.csv
+author_gt10_new.py
+在计算characters_6时, 发现一些作者在学术生涯前五年所发表的论文在作者排序中排在
+10名之后, 因此从author_gt10.csv中剔除了这些作者
