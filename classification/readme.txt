@@ -5,6 +5,7 @@ total_citation_by_year.py
 每行包括两列, 第一列年份, 第二列总引用数
 
 2.
-year_author.csv
-year_author.py
-按照年份将作者归类, 第一列代表年份, 第二列代表作者
+year_citation_num.csv
+year_citation_num.py
+根据原始引用文件计算每年产生的引用量存入csv中
+
