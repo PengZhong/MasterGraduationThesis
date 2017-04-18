@@ -13,3 +13,8 @@ year_citation_num.py
 year_author_paper.py
 根据../result/AuthorCitationNetwork中的年份文件生成每年的作者及其对应的论文的文件
 存入到../result/AuthorCitationByYear文件夹下
+
+4.
+year_author_citation.py
+根据year_author_paper.py产生的年份作者csv文件, 统计按照年份这些作者在当年的被引用次数, 
+并存入../result/AuthorCitationByYear/下的按年份命名的csv文件中
