@@ -18,3 +18,7 @@ year_author_paper.py
 year_author_citation.py
 根据year_author_paper.py产生的年份作者csv文件, 统计按照年份这些作者在当年的被引用次数, 
 并存入../result/AuthorCitationByYear/下的按年份命名的csv文件中
+
+5.
+rank_author.py
+根据论文引用百分比, 把所有学者按照百分比大小排序
