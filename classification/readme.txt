@@ -21,4 +21,10 @@ year_author_citation.py
 
 5.
 rank_author.py
+rank_author.csv
 根据论文引用百分比, 把所有学者按照百分比大小排序
+
+6.
+author_characters.csv
+author_characters.py
+将rank_author.csv中的作者及其全部特征值合并到一个文件中, 作者顺序不变
