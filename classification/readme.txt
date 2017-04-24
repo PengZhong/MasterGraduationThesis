@@ -28,3 +28,7 @@ rank_author.csv
 author_characters.csv
 author_characters.py
 将rank_author.csv中的作者及其全部特征值合并到一个文件中, 作者顺序不变
+
+7.
+arff_file.py
+根据author_characters.csv, 针对每个特征向量单独生成一个arff文件, 用于weka进行分类处理
