@@ -32,3 +32,17 @@ author_characters.py
 7.
 arff_file.py
 根据author_characters.csv, 针对每个特征向量单独生成一个arff文件, 用于weka进行分类处理
+
+8.
+score.py
+sorted_author.csv
+根据author_characters.csv中的属性进行计算, 得出学者排名(属性忘记归一化)
+
+9.
+normalized_socre.py
+normalized_sorted_author.csv
+根据author_characters.csv中的属性进行计算, 对属性进行了归一化得出排序
+
+10.
+top_compare.py
+比较模型排序结果与实际结果的重合度
